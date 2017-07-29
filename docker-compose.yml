@@ -1,0 +1,37 @@
+version: '2'
+
+services:
+  proxy:
+    #cpu_shares: 450
+    #mem_limit: 450000000
+    image: "nginx:1.13.3-alpine"
+    ports:
+      - "5678:80"
+    links:
+      - pc
+      - sp
+      - api
+    volumes:
+      - /Users/tomokatsuiguchi-imac/tmp/docker/conf.d:/etc/nginx/conf.d
+  pc:
+    #cpu_shares: 450
+    #mem_limit: 450000000
+    image: "nginx:1.13.3-alpine"
+    links:
+      - api
+    volumes:
+      - /Users/tomokatsuiguchi-imac/tmp/docker/html-pc:/usr/share/nginx/html
+  sp:
+    #cpu_shares: 450
+    #mem_limit: 450000000
+    image: "nginx:1.13.3-alpine"
+    links:
+      - api
+    volumes:
+      - /Users/tomokatsuiguchi-imac/tmp/docker/html-sp:/usr/share/nginx/html
+  api:
+    #cpu_shares: 450
+    #mem_limit: 450000000
+    image: "nginx:1.13.3-alpine"
+    volumes:
+      - /Users/tomokatsuiguchi-imac/tmp/docker/html-api:/usr/share/nginx/html
