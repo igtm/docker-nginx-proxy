@@ -7,7 +7,7 @@ services:
     image: "nginx:1.13.3-alpine"
     ports:
       - "5678:80"
-    links:
+    depends_on:
       - pc
       - sp
       - api
@@ -17,16 +17,12 @@ services:
     #cpu_shares: 450
     #mem_limit: 450000000
     image: "nginx:1.13.3-alpine"
-    links:
-      - api
     volumes:
       - /Users/tomokatsuiguchi-imac/tmp/docker/html-pc:/usr/share/nginx/html
   sp:
     #cpu_shares: 450
     #mem_limit: 450000000
     image: "nginx:1.13.3-alpine"
-    links:
-      - api
     volumes:
       - /Users/tomokatsuiguchi-imac/tmp/docker/html-sp:/usr/share/nginx/html
   api:
